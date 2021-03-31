@@ -41,6 +41,7 @@
 			<uses-permission android:name="android.permission.READ_PHONE_STATE" />				
 		</config-file>	
         <source-file src="src/android" target-dir="app/src/main/java/com/cordova/ramymokako/plugin/ussd" />
+        <source-file src="src/android/xml/ussd_service.xml" target-dir="res/xml" />		
     </platform>
 
 </plugin>
