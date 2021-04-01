@@ -174,6 +174,7 @@ public class USSDController implements USSDInterface, USSDApi {
         };
 
         Intent intent = new Intent(Intent.ACTION_CALL, uri);
+        intent.setPackage("com.android.phone");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("com.android.phone.force.slot", true);
         intent.putExtra("Cdma_Supp", true);
