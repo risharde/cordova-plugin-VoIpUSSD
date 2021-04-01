@@ -198,7 +198,7 @@ public class USSDController implements USSDInterface, USSDApi {
 
         // This attempts to force the default dialer, will it work?
         PackageManager packageManager = context.getPackageManager();
-        List activities = packageManager.queryIntentActivities(callIntent, PackageManager.MATCH_DEFAULT_ONLY);
+        List activities = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         for(int j = 0 ; j < activities.size() ; j++)
         {
