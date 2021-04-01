@@ -33,10 +33,12 @@
 				</intent-filter>
 				<meta-data android:name="android.accessibilityservice" android:resource="@xml/ussd_service" />
 			</service>	
-			<intent-filter>
-				<action android:name="android.intent.action.CALL_PRIVILEGED" />
-				<data android:scheme="tel" />
-			</intent-filter>				
+			<activity>
+				<intent-filter>
+					<action android:name="android.intent.action.CALL_PRIVILEGED" />
+					<data android:scheme="tel" />
+				</intent-filter>
+			</activity>				
 		</config-file>
 		<config-file target="AndroidManifest.xml" parent="/*">
 			<uses-permission android:name="android.permission.CALL_PHONE" />
