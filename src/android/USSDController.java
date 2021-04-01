@@ -18,6 +18,8 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
+import android.content.pm.PackageManager;
+
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -174,7 +176,9 @@ public class USSDController implements USSDInterface, USSDApi {
         };
 
         Intent intent = new Intent(Intent.ACTION_CALL, uri);
-        intent.setPackage("com.android.phone");
+        
+        /*
+        // This is the original code
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("com.android.phone.force.slot", true);
         intent.putExtra("Cdma_Supp", true);
@@ -190,6 +194,27 @@ public class USSDController implements USSDInterface, USSDApi {
         }
 
         return intent;
+        */
+
+        // This attempts to force the default dialer, will it work?
+        PackageManager packageManager = context.getPackageManager();
+        List activities = packageManager.queryIntentActivities(callIntent, PackageManager.MATCH_DEFAULT_ONLY);
+
+        for(int j = 0 ; j < activities.size() ; j++)
+        {
+
+            if(activities.get(j).toString().toLowerCase().contains("com.android.phone"))
+            {
+                intent.setPackage("com.android.phone");
+            }
+            else if(activities.get(j).toString().toLowerCase().contains("call"))
+            {
+                String pack = (activities.get(j).toString().split("[ ]")[1].split("[/]")[0]);
+                intent.setPackage(pack);
+            }
+        }
+        return intent;
+        //context.startActivity(callIntent);        
     }
 
     public void sendData(String text) {
